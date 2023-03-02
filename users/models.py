@@ -83,8 +83,6 @@ class UserManager(BaseUserManager):
             )
         return self.none()
 
-# Worker
-
 
 class User(AbstractBaseUser, PermissionsMixin):
     username_validator = UnicodeUsernameValidator()
@@ -133,11 +131,13 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self) -> str:
         return self.name
+
     class Meta:
         # managed=False
         verbose_name = _("Hodim")
         verbose_name_plural = _("Hodimlar")
         db_table = "users"
+# Worker
 
 
 class AllowedUsers(models.Model):
@@ -151,8 +151,6 @@ class AllowedUsers(models.Model):
         verbose_name_plural = _("Ruxsat berilganlar")
         db_table = 'allowed_users'
 
-# Xaridor
-
 
 class Customer(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Xaridor"))
@@ -161,31 +159,12 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     class Meta:
         verbose_name = _("Xaridor")
         verbose_name_plural = _("Xaridorlar")
         db_table = 'customer'
-
-
-# Jarimalar
-
-
-class Penalty(models.Model):
-    user = models.ForeignKey('User', models.DO_NOTHING,
-                             verbose_name=_("Hodim"))
-    cash = models.IntegerField(default=0, verbose_name=_("Pul miqdori"))
-    date = models.DateTimeField(auto_now_add=True)
-    branch = models.ForeignKey("branch.Branch", verbose_name=_(
-        "Filial"), on_delete=models.DO_NOTHING)
-
-    class Meta:
-        verbose_name = _("Jarima")
-        verbose_name_plural = _("Jarimalar")
-        db_table = 'penalty'
-
-
-# Ta'minotchilar
+# Xaridor
 
 
 class Provider(models.Model):
@@ -199,28 +178,9 @@ class Provider(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
     class Meta:
         verbose_name = _("Ta'minotchi")
         verbose_name_plural = _("Ta'minotchilar")
         db_table = 'provider'
-
-# Ta'minotchi bilan hiosb-kitob
-
-
-class ProviderManagement(models.Model):
-    user = models.ForeignKey('User', models.DO_NOTHING,
-                             verbose_name=_("Hodim"))
-    provider = models.ForeignKey(
-        Provider, models.DO_NOTHING, verbose_name=_("Ta'minotchi"))
-    cash = models.IntegerField(verbose_name=_("Pul miqdori"))
-    date = models.DateTimeField(auto_now_add=True)
-    branch = models.ForeignKey("branch.Branch", verbose_name=_(
-        "Filial"), on_delete=models.DO_NOTHING)
-
-    def __str__(self) -> str:
-        return self.provider.name 
-    class Meta:
-        verbose_name = _("Ta'minotchi bilan hiosb-kitob")
-        verbose_name_plural = _("Ta'minotchi bilan hiosb-kitob")
-        db_table = 'provider_management'
-
+# Ta'minotchilar
