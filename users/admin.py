@@ -4,12 +4,13 @@ from .models import (AllowedUsers, Customer, User,
                      Provider)
 from django.contrib.auth.models import Group
 admin.site.unregister(Group)
-# hodimlar
+
+
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
     model = User
-    list_display = ("username","name","phone")
-    list_display_links = ("username","name","phone")
+    list_display = ("username", "name", "phone")
+    list_display_links = ("username", "name", "phone")
     # search_fields = ("username",)
     add_fieldsets = (
         (
@@ -20,31 +21,35 @@ class UserAdmin(BaseUserAdmin):
             },
         ),
         ("", {
-            "fields": ("name","phone","birth_date","percentage","branch"),
+            "fields": ("name", "phone", "birth_date", "percentage", "branch"),
         }),
     )
-    
+
     fieldsets = (
         ("Asosiy ma'lumotlar", {
-            "fields": ("username","name","phone","birth_date","percentage","branch"),
+            "fields": ("username", "name", "phone", "birth_date", "percentage", "branch"),
         }),
     )
     # ordesring = ("id",)
-# ruhstanoma
+# hodimlar
+
+
 @admin.register(AllowedUsers)
 class AllowedUsersAdmin(admin.ModelAdmin):
-    list_display = ("user","branch")
-    list_display_links = ("user","branch")
+    list_display = ("user", "branch")
+    list_display_links = ("user", "branch")
+# ruhstanoma
 
-# Xaridor
+
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ("name","phone","address")
+    list_display = ("name", "phone", "address")
     list_display_links = ("name",)
-# Taminotchi
+# Xaridor
+
+
 @admin.register(Provider)
 class ProviderAdmin(admin.ModelAdmin):
-    list_display = ("name","phone","address")
+    list_display = ("name", "phone", "address")
     list_display_links = ("name",)
-
-
+# Taminotchi

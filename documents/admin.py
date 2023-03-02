@@ -4,7 +4,7 @@ from .models import (CustomerManagement, CustomerSendBack,
                      CustomerSendBackItems, OrderItem, Orders, PayOffice,
                      Penalty, Prixod, PrixodItems, ProviderManagement,
                      ProviderSendBack, ProviderSendBackItems, Sell, SellItem,
-                     Timtable, UserSalary, WriteOff, WriteOffItems)
+                     Timtable, UserSalary, WriteOff, WriteOffItems,TimtableItems)
 
 
 # Register your models here.
@@ -31,3 +31,4 @@ admin.site.register(WriteOff)
 admin.site.register(ProviderManagement)
 admin.site.register(Timtable)
 admin.site.register(Penalty)
+admin.site.register(TimtableItems)

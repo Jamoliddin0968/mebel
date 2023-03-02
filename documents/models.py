@@ -269,6 +269,7 @@ class Timtable(DocumentBaseModel):
         verbose_name_plural = _("davomat hujjati")
         db_table = 'timtable'
 # davomat hujjati
+
 class TimtableItems(models.Model):
     come = models.TimeField(verbose_name=_("Kelgan vaqti"))
     go_back = models.TimeField(_("Ketgan vaqti"))
