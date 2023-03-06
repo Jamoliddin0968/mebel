@@ -19,7 +19,7 @@ class DocumentBaseModel(models.Model):
     user = models.ForeignKey(
         'users.User', models.DO_NOTHING, verbose_name=_("Hodim"))
     # total_sum = models.IntegerField(_("Summa"),default=0)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(verbose_name=_("Vaqti"))
     branch = models.ForeignKey("branch.Branch", verbose_name=_(
         "Filial"), on_delete=models.DO_NOTHING)
 
@@ -32,7 +32,6 @@ class BaseModel(models.Model):
     product = models.ForeignKey(
         "product.Product", models.DO_NOTHING, verbose_name=_("Mahsulot"))
     quantity = models.IntegerField(verbose_name=_("Miqdori"))
-    price = models.PositiveIntegerField(default=0, verbose_name=_("Narxi"))
 
     def __str__(self):
         return self.product.name
