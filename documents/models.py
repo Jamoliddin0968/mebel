@@ -262,7 +262,8 @@ class Penalty(DocumentBaseModel):
 
 
 class Timtable(DocumentBaseModel):
-    user = models.ForeignKey("users.User", models.DO_NOTHING,)
+    user = models.ForeignKey("users.User", models.DO_NOTHING)
+    date = models.DateField(_("Sana"))
     class Meta:
         verbose_name = _("davomat hujjati")
         verbose_name_plural = _("davomat hujjati")
