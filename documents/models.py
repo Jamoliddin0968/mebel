@@ -101,32 +101,6 @@ class PayOffice(DocumentBaseModel):
 # kassa hujjati
 
 
-class Orders(DocumentBaseModel):
-
-    customer = models.ForeignKey(
-        "users.Customer", models.DO_NOTHING, verbose_name=_("Xaridor"))
-    cost = models.IntegerField(_("Narxi"))
-    total_sum = models.IntegerField(_("Summa"), default=0)
-
-    def __str__(self):
-        return self.customer
-
-    class Meta:
-        verbose_name = _("Buyurtma")
-        verbose_name_plural = _("Buyurtmalar")
-        db_table = 'orders'
-# Buyurtmalar hujjati
-
-
-class OrderItem(BaseModel):
-    order = models.ForeignKey(Orders, verbose_name=_(
-        "Buyurtma"), on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name = _("Buyutma tarkibi")
-        verbose_name_plural = _("Buyutmalar tarkibi")
-        db_table = 'order_items'
-# Buyurtma hujjati tarkibi
 
 
 class Prixod(DocumentBaseModel):
@@ -179,6 +153,33 @@ class SellItem(BaseModel):
         verbose_name_plural = _("Sotuv tarkibi")
         db_table = 'sell_item'
 # sotuv hujjati tarkibi
+
+
+"""                                   Buyurtmalar hujjati                                        """
+
+class Orders(DocumentBaseModel):
+
+    customer = models.ForeignKey(
+        "users.Customer", models.DO_NOTHING, verbose_name=_("Xaridor"))
+    def __str__(self):
+        return self.customer
+
+    class Meta:
+        verbose_name = _("Buyurtma")
+        verbose_name_plural = _("Buyurtmalar")
+        db_table = 'orders'
+# Buyurtmalar hujjati
+
+
+class OrderItem(BaseModel):
+    order = models.ForeignKey(Orders, verbose_name=_(
+        "Buyurtma"), on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _("Buyutma tarkibi")
+        verbose_name_plural = _("Buyutmalar tarkibi")
+        db_table = 'order_items'
+# Buyurtma hujjati tarkibi
 
 
 """                              Xaridorlar bilan hisob kitoblar                               """
@@ -262,7 +263,6 @@ class Penalty(DocumentBaseModel):
 
 class Timtable(DocumentBaseModel):
     user = models.ForeignKey("users.User", models.DO_NOTHING,)
-    user = None
     class Meta:
         verbose_name = _("davomat hujjati")
         verbose_name_plural = _("davomat hujjati")
