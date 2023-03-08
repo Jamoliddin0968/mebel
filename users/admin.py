@@ -21,13 +21,13 @@ class UserAdmin(BaseUserAdmin):
             },
         ),
         ("", {
-            "fields": ("name", "phone", "birth_date", "percentage", "branch"),
+            "fields": ("name", "phone", "birth_date", "percentage", "branch","address","salary"),
         }),
     )
 
     fieldsets = (
         ("Asosiy ma'lumotlar", {
-            "fields": ("username", "name", "phone", "birth_date", "percentage", "branch"),
+            "fields": ("username", "name", "phone", "birth_date", "percentage", "branch","address","salary"),
         }),
     )
     # ordesring = ("id",)

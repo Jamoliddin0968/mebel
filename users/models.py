@@ -173,8 +173,6 @@ class Provider(models.Model):
         verbose_name=_("Corporation"), max_length=255)
     address = models.CharField(verbose_name=_("Manzili"), max_length=255)
     phone = models.CharField(verbose_name=_("Telefon raqami"), max_length=255)
-    branch = models.ForeignKey("branch.Branch", verbose_name=_(
-        "Filial"), on_delete=models.DO_NOTHING)
 
     def __str__(self) -> str:
         return self.name

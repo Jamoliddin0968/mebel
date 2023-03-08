@@ -47,10 +47,8 @@ class BaseModel(models.Model):
 class CustomerManagement(DocumentBaseModel):
     customer = models.ForeignKey(
         "users.Customer", models.DO_NOTHING, verbose_name=_("Haridor"))
-    cash = models.PositiveIntegerField(
+    cash = models.IntegerField(
         default=0, verbose_name=_("Pul miqdori"))
-    status = models.IntegerField(
-        choices=MANAGE_TYPES, verbose_name=_("Holati"))
 
     def __str__(self):
         return self.customer.name
@@ -90,8 +88,6 @@ class CustomerSendBackItems(BaseModel):
 
 class PayOffice(DocumentBaseModel):
     cash = models.IntegerField(default=0, verbose_name=_("Pul miqdori"))
-    status = models.IntegerField(
-        choices=MANAGE_TYPES, verbose_name=_("Holati"))
     comment = models.TextField(verbose_name=_("Izoh"))
 
     class Meta:
@@ -104,7 +100,6 @@ class PayOffice(DocumentBaseModel):
 
 
 class Prixod(DocumentBaseModel):
-
     provider = models.ForeignKey("users.Provider", models.DO_NOTHING)
     total_sum = models.IntegerField(_("Summa"))
 
@@ -211,8 +206,6 @@ class ProviderManagement(DocumentBaseModel):
     provider = models.ForeignKey(
         "users.Provider", models.DO_NOTHING, verbose_name=_("Ta'minotchi"))
     cash = models.IntegerField(verbose_name=_("Pul miqdori"))
-    status = models.IntegerField(
-        choices=MANAGE_TYPES, verbose_name=_("Holati"))
 
     def __str__(self) -> str:
         return self.provider.name
@@ -271,8 +264,10 @@ class Timtable(DocumentBaseModel):
 # davomat hujjati
 
 class TimtableItems(models.Model):
+    worker = models.ForeignKey("users.User", models.DO_NOTHING)
     come = models.TimeField(verbose_name=_("Kelgan vaqti"))
     go_back = models.TimeField(_("Ketgan vaqti"))
+    comment = models.TextField()
     class Meta:
         verbose_name = _("davomat hujjati tarkibi")
         verbose_name_plural = _("davomat hujjati tarkibi")
@@ -283,7 +278,7 @@ class UserSalary(models.Model):
     user = models.ForeignKey(
         "users.User", models.DO_NOTHING, verbose_name=_("Hodim"))
     cash = models.IntegerField(verbose_name=_("Pul miqdori"))
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField()
     branch = models.ForeignKey("branch.Branch", verbose_name=_(
         "Filial"), on_delete=models.DO_NOTHING)
 

@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 class Branch(models.Model):
     name = models.CharField(_("nomi"), max_length=50)    
     adress = models.CharField(_("Manzili"), max_length=150)
-    
+    rent = models.PositiveIntegerField(_("Ijara"))
     def __str__(self):
         return self.name
     class Meta:

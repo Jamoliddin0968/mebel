@@ -36,7 +36,7 @@ MY_APPS = [
     "documents",
 ]
 LIBS = [
-    
+     "rest_framework",
 ]
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -144,3 +144,7 @@ ADMIN_APPS_ORDER = (
     'users',  # replace with the label of your app
     '*',
 )
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
