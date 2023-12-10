@@ -9,9 +9,9 @@ router.register("", ProductViewSet)
 
 urlpatterns = [
     path("", include(router.urls), name="products"),
-    path("images/p",
+    path("<int:product_id>/images/",
          ProductImageCreateAPIView.as_view(), name="product_image"),
-    path("images/<int:image_id>/",
+    path("images/<int:pk>/",
          ProductImageDestroyAPIView.as_view(), name="delete image")
 
 ]

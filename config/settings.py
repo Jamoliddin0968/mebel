@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,9 +38,9 @@ MY_APPS = [
     "apps.categories",
 ]
 LIBS = [
-     
-     "rest_framework",
-     
+
+    "rest_framework",
+
 ]
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -50,7 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_yasg',
     # 'coreapi'
-    
+
 ] + MY_APPS + LIBS
 
 MIDDLEWARE = [
@@ -137,12 +138,20 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-import os
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR,"staticfiles")
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
+
+# Your other settings...
+
+# Define the base directory of your project
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Media Settings
+MEDIA_URL = '/media/'  # The URL to serve media files during development
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "users.User"
 ADMIN_APPS_ORDER = (
@@ -150,6 +159,6 @@ ADMIN_APPS_ORDER = (
     '*',
 )
 GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
+    'all_applications': True,
+    'group_models': True,
 }

@@ -6,9 +6,9 @@ from django.utils.translation import gettext_lazy as _
 import uuid
 
 
-def image_upload_path(instance, filename):
+def rename_image(instance, filename):
     new_image_name = uuid.uuid4()
-    return f'images/product/{new_image_name}.{filename.split(".")[-1]}'
+    return f'images/products/{new_image_name}.{filename.split(".")[-1]}'
 
 
 class Product(models.Model):
@@ -23,8 +23,8 @@ class Product(models.Model):
 
 
 class ProductImage(models.Model):
-    product = models.ForeignKey("products.product", on_delete=models.CASCADE)
-    img = models.ImageField(upload_to='product/images')
+    product = models.ForeignKey("products.product", on_delete=models.CASCADE,related_name='product_images')
+    image = models.ImageField(upload_to=rename_image)
 # Mahsulot klassi
 
 
