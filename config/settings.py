@@ -30,10 +30,11 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 MY_APPS = [
-    "product",
-    "users",
-    'branch',
-    "documents",
+    "apps.products",
+    "apps.users",
+    'apps.branch',
+    "apps.documents",
+    "apps.categories",
 ]
 LIBS = [
      
