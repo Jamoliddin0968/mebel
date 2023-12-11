@@ -12,7 +12,8 @@ class ProductImageSerializer(ModelSerializer):
 
 
 class ProductSerializer(ModelSerializer):
-    images = ProductImageSerializer(many=True, source='product_images')
+    images = ProductImageSerializer(
+        many=True, source='product_images', read_only=True)
 
     class Meta:
         fields = "__all__"
