@@ -8,8 +8,9 @@ from rest_framework.response import Response
 
 
 class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all()
+    queryset = Product.objects.select_related('product_images').all()
     serializer_class = ProductSerializer
+    http_method_names = ['get', 'post', 'put']
 
 
 class ProductImageCreateAPIView(CreateAPIView):

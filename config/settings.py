@@ -36,6 +36,7 @@ MY_APPS = [
     'apps.branch',
     "apps.documents",
     "apps.categories",
+    "apps.utils"
 ]
 LIBS = [
 
