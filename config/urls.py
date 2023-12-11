@@ -22,7 +22,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("products/", include("apps.products.urls")),
     path("users/", include("apps.users.urls")),
-    path('categories/', include('apps.categories.urls'))
+    path('categories/', include('apps.categories.urls')),
+    path('warehouse/', include('apps.warehouses.urls')),
+    path('branches/', include('apps.branches.urls')),
+    path('customers/', include('apps.customers.urls'))
 ]+drf_yasg_urlpatterns
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -91,9 +91,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         _("username"),
         max_length=150,
         unique=True,
-        help_text=_(
-            _("Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.")
-        ),
         validators=[username_validator],
         error_messages={
             "unique": _("Bu username bazada mavjud"),
@@ -101,7 +98,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     first_name = models.CharField(_("Ism"), max_length=150, blank=True)
     last_name = models.CharField(_("Familiya"), max_length=150, blank=True)
-    patronymic = models.CharField(max_length=31, verbose_name="Otasining ismi",null=True)
+    patronymic = models.CharField(
+        max_length=31, verbose_name="Otasining ismi", null=True)
     phone = models.CharField(
         max_length=15, verbose_name=_("Telefon raqami"), null=True)
     address = models.CharField(
@@ -110,16 +108,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(
         _("staff status"),
         default=False,
-        help_text=_(
-            "Designates whether the user can log into this admin site."),
     )
     is_active = models.BooleanField(
         _("active"),
         default=True,
-        help_text=_(
-            "Designates whether this user should be treated as active. "
-            "Unselect this instead of deleting accounts."
-        ),
     )
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
     objects = UserManager()
@@ -128,23 +120,18 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def clean(self):
         super().clean()
-        self.email = self.__class__.objects.normalize_email(self.email)
 
     def get_full_name(self):
-        """
-        Return the first_name plus the last_name, with a space in between.
-        """
         full_name = "%s %s" % (self.first_name, self.last_name)
         return full_name.strip()
 
     def get_short_name(self):
-        """Return the short name for the user."""
         return self.first_name
+
     def __str__(self) -> str:
         return self.get_full_name()
 
     class Meta:
-        # managed=False
         verbose_name = _("Hodim")
         verbose_name_plural = _("Hodimlar")
 # Worker
@@ -153,28 +140,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 class AllowedUsers(models.Model):
     user = models.ForeignKey('users.User', models.DO_NOTHING,
                              blank=True, null=True, verbose_name=_("Hodim"))
-    branch = models.ForeignKey("branch.Branch", verbose_name=_(
-        "Filial"), on_delete=models.DO_NOTHING, null=True)
 
     class Meta:
         verbose_name = _("Ruxsat berilgan")
         verbose_name_plural = _("Ruxsat berilganlar")
-        db_table = 'allowed_users'
 
 
-class Customer(models.Model):
-    name = models.CharField(max_length=255, verbose_name=_("Xaridor"))
-    phone = models.CharField(max_length=255, verbose_name=_("Telefon raqam"))
-    address = models.CharField(max_length=255, verbose_name=_("Manzil"))
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = _("Xaridor")
-        verbose_name_plural = _("Xaridorlar")
-        db_table = 'customer'
-# Xaridor
 
 
 class Provider(models.Model):

@@ -1,4 +1,4 @@
-from django.urls import path,include
+from django.urls import path, include
 from .views import (
     UserViewSet,
 )
@@ -9,5 +9,5 @@ router = DefaultRouter()
 router.register("", UserViewSet)
 
 urlpatterns = [
-    path("",include(router.urls)),
+    path("", include(router.urls)),
 ]

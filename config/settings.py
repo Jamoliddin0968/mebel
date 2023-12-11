@@ -33,10 +33,12 @@ ALLOWED_HOSTS = ['*']
 MY_APPS = [
     "apps.products",
     "apps.users",
-    'apps.branch',
+    'apps.branches',
     "apps.documents",
     "apps.categories",
-    "apps.utils"
+    "apps.utils",
+    'apps.warehouses',
+    'apps.customers'
 ]
 LIBS = [
 

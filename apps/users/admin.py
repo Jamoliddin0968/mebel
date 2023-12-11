@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import (AllowedUsers, Customer, User,
-                     Provider)
+from .models import (User,)
 from django.contrib.auth.models import Group
 admin.site.unregister(Group)
 
@@ -21,35 +20,18 @@ class UserAdmin(BaseUserAdmin):
             },
         ),
         ("", {
-            "fields": ("name", "phone", "birth_date", "percentage", "branch","address","salary"),
+            "fields": ("name", "phone", "birth_date", "percentage", "address", "salary"),
         }),
     )
 
     fieldsets = (
         ("Asosiy ma'lumotlar", {
-            "fields": ("username", "name", "phone", "birth_date", "percentage", "branch","address","salary"),
+            "fields": ("username", "name", "phone", "birth_date", "percentage", "address", "salary"),
         }),
     )
     # ordesring = ("id",)
 # hodimlar
 
-
-@admin.register(AllowedUsers)
-class AllowedUsersAdmin(admin.ModelAdmin):
-    list_display = ("user", "branch")
-    list_display_links = ("user", "branch")
 # ruhstanoma
 
 
-@admin.register(Customer)
-class CustomerAdmin(admin.ModelAdmin):
-    list_display = ("name", "phone", "address")
-    list_display_links = ("name",)
-# Xaridor
-
-
-@admin.register(Provider)
-class ProviderAdmin(admin.ModelAdmin):
-    list_display = ("name", "phone", "address")
-    list_display_links = ("name",)
-# Taminotchi

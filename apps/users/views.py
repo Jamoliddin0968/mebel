@@ -9,3 +9,4 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
 
     http_method_names = ['get', 'post', 'put', "patch"]
+
