@@ -15,3 +15,6 @@ class Customer(models.Model):
     class Meta:
         verbose_name = _("Xaridor")
         verbose_name_plural = _("Xaridorlar")
+
+    def get_full_name(self,):
+        return f"{self.first_name} {self.last_name}"

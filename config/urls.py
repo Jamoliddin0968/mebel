@@ -18,6 +18,15 @@ from django.urls import path, include
 from .yasg_urls import drf_yasg_urlpatterns
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+token_urlpatterns = [
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+]
 urlpatterns = [
     path('api/v1/admin/', admin.site.urls),
     path("api/v1/products/", include("apps.products.urls")),
@@ -26,7 +35,7 @@ urlpatterns = [
     path('api/v1/warehouse/', include('apps.warehouses.urls')),
     path('api/v1/branches/', include('apps.branches.urls')),
     path('api/v1/customers/', include('apps.customers.urls'))
-]+drf_yasg_urlpatterns
+]+drf_yasg_urlpatterns+token_urlpatterns
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
