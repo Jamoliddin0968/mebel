@@ -11,28 +11,21 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('products', '__first__'),
+        ('customers', '0001_initial'),
         ('branches', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Receive',
+            name='Sale',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('datetime', models.DateTimeField(auto_now_add=True)),
-                ('comment', models.TextField()),
+                ('datetime', models.IntegerField(default=0)),
+                ('price', models.FloatField(default=0)),
+                ('comment', models.TextField(default='')),
                 ('branch', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='branches.branch')),
+                ('customer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='customers.customer')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='ReceiveItem',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.FloatField(default=0)),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.product')),
-                ('receive', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='receives.receive')),
             ],
         ),
     ]

@@ -8,6 +8,7 @@ class Customer(models.Model):
     last_name = models.CharField(_("Familiya"), max_length=150, blank=True)
     phone = models.CharField(max_length=255, verbose_name=_("Telefon raqam"))
     address = models.CharField(max_length=255, verbose_name=_("Manzil"))
+    loan = models.FloatField(default=0)
 
     def __str__(self):
         return self.first_name

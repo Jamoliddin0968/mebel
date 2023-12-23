@@ -14,8 +14,8 @@ def rename_image(instance, filename):
 class Product(models.Model):
     name = models.CharField(_("Nomi"), max_length=255)
     category = models.ForeignKey(
-        'categories.Category', on_delete=models.CASCADE,related_name="category_products")
-    price = models.PositiveIntegerField(_("Sotib olish narxi"), default=0)
+        'categories.Category', on_delete=models.CASCADE, related_name="category_products")
+    price = models.FloatField(_("Sotib olish narxi"), default=0)
 
     class Meta:
         verbose_name = _("Mahslulot")
@@ -23,7 +23,8 @@ class Product(models.Model):
 
 
 class ProductImage(models.Model):
-    product = models.ForeignKey("products.product", on_delete=models.CASCADE,related_name='product_images')
+    product = models.ForeignKey(
+        "products.product", on_delete=models.CASCADE, related_name='product_images')
     image = models.ImageField(upload_to=rename_image)
 # Mahsulot klassi
 
