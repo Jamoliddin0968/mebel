@@ -15,7 +15,7 @@ class ReceiveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Receive
-        fields = ('id', 'branch', 'user', 'comment', 'date', 'items')
+        fields = ('id', 'branch', 'user', 'comment', 'datetime', 'items')
 
     def create(self, validated_data):
         items = validated_data.pop('items')

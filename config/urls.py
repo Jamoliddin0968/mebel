@@ -36,7 +36,8 @@ urlpatterns = [
     path('api/v1/branches/', include('apps.branches.urls')),
     path('api/v1/customers/', include('apps.customers.urls')),
     path('api/v1/receives/', include('apps.receives.urls')),
-    path('api/v1/receives/', include('apps.sales.urls')),
+    path('api/v1/sales/', include('apps.sales.urls')),
+    path('api/v1/orders/', include('apps.orders.urls')),
 ]+drf_yasg_urlpatterns+token_urlpatterns
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
