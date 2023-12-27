@@ -16,6 +16,7 @@ class Product(models.Model):
     category = models.ForeignKey(
         'categories.Category', on_delete=models.CASCADE, related_name="category_products")
     price = models.FloatField(_("Sotib olish narxi"), default=0)
+    sizes = models.TextField(default="")
 
     class Meta:
         verbose_name = _("Mahslulot")
