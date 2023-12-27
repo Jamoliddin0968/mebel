@@ -8,4 +8,4 @@ class BranchViewSet(viewsets.ModelViewSet):
     serializer_class = BranchSerializer
     queryset = Branch.objects.all()
 
-    # http_method_names = ['get', 'post', 'put', 'delete',]
+    http_method_names = ['get', 'post', 'put', 'patch']
