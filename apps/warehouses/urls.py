@@ -1,13 +1,11 @@
+from rest_framework import routers
 from django.urls import path, include
-from .views import (
-    WareHouseViewSet,
-)
-from rest_framework.routers import DefaultRouter
+from .views import WareHouseViewSet, WareHouseItemViewSet
 
-
-router = DefaultRouter()
-router.register("", WareHouseViewSet)
+router = routers.DefaultRouter()
+router.register('', WareHouseViewSet)
+router.register('items', WareHouseItemViewSet)
 
 urlpatterns = [
-    path("", include(router.urls)),
+    path('', include(router.urls)),
 ]
