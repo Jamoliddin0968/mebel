@@ -23,9 +23,9 @@ class ProductSerializer(ModelSerializer):
 
     def create(self, validated_data):
         new_product = super().create(validated_data)
-        branches = Branch.objects.all()
+        branches = WareHouse.objects.all()
         for branch_item in branches:
             WareHouse.objects.get_or_create(
-                branch=branch_item, product=new_product)
+                warehouse=branch_item, product=new_product)
 
         return new_product
