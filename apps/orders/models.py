@@ -14,3 +14,17 @@ class Order(models.Model):
     price = models.DecimalField(max_digits=13, decimal_places=2)
 
     comment = models.TextField(default="")
+    state = models.IntegerField(default=1)
+    is_notificated = models.BooleanField(default=False)
+    # notification
+
+
+class OrderImages(models.Model):
+    img = models.ImageField(upload_to='order/images')
+
+
+class OrderItem(models.Model):
+    product = models.ForeignKey('products.Product', on_delete=models.CASCADE)
+    amount = models.FloatField(default=0)
+    sizes = models.TextField()
+    order = models.ForeignKey('orders.Order', on_delete=models.CASCADE)
