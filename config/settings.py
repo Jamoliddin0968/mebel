@@ -42,7 +42,8 @@ MY_APPS = [
     'apps.customers',
     'apps.receives',
     'apps.sales',
-    'apps.orders'
+    'apps.orders',
+    'apps.notifications',
 ]
 LIBS = [
     "rest_framework",
@@ -57,7 +58,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'drf_yasg',
     'drf_spectacular',
-
 ] + MY_APPS + LIBS
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Your Project API',

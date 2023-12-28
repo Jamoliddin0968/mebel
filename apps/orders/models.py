@@ -1,5 +1,7 @@
 from django.db import models
 
+from apps.notifications.models import ScheduledNotification
+
 # Create your models here.
 
 
@@ -16,7 +18,8 @@ class Order(models.Model):
     comment = models.TextField(default="")
     state = models.IntegerField(default=1)
     is_notificated = models.BooleanField(default=False)
-    # notification
+    notification = models.ForeignKey(
+        ScheduledNotification, on_delete=models.SET_NULL, null=True, blank=True)
 
 
 class OrderImages(models.Model):
