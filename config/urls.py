@@ -38,6 +38,7 @@ urlpatterns = [
     path('api/v1/receives/', include('apps.receives.urls')),
     path('api/v1/sales/', include('apps.sales.urls')),
     path('api/v1/orders/', include('apps.orders.urls')),
+    path('api/v1/loans/', include('apps.loans.urls')),
     path('api/v1/notifications/', include('apps.notifications.urls')),
 ]+drf_yasg_urlpatterns+token_urlpatterns
 
