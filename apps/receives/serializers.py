@@ -11,11 +11,15 @@ class ReceiveItemSerializer(serializers.ModelSerializer):
 
 
 class ReceiveSerializer(serializers.ModelSerializer):
-    items = ReceiveItemSerializer(many=True)
+    items = ReceiveItemSerializer(many=True, source="receive_items")
 
     class Meta:
         model = Receive
-        fields = ('id', 'branch', 'user', 'comment', 'datetime', 'items')
+        fields = "__all__"
+
+        extra_kwargs = {
+            'user': {'read_only': True}
+        }
 
     def create(self, validated_data):
         items = validated_data.pop('items')

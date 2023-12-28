@@ -6,3 +6,7 @@ class LoanSerializer(serializers.ModelSerializer):
     class Meta:
         model = Loans
         fields = "__all__"
+
+        extra_kwargs = {
+            'user': {'read_only': True}
+        }

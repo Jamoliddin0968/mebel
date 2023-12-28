@@ -4,11 +4,14 @@ from .serializers import LoanSerializer
 from .models import Loans
 from drf_spectacular.utils import extend_schema
 
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
 
 class LoanViewSet(viewsets.ModelViewSet):
     queryset = Loans.objects.all()
     serializer_class = LoanSerializer
     http_method_names = ["post", 'patch', "get"]
+    permission_classes = [IsAuthenticatedOrReadOnly,]
 
     @extend_schema(
         tags=['Loan'],
@@ -30,3 +33,6 @@ class LoanViewSet(viewsets.ModelViewSet):
     )
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

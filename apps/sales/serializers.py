@@ -14,6 +14,9 @@ class SaleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sale
         fields = "__all__"
+        extra_kwargs = {
+            'user': {'read_only': True}
+        }
 
     def create(self, validated_data):
         items = validated_data.pop('items')

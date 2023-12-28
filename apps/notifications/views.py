@@ -3,10 +3,16 @@ from apps.notifications.models import Notification
 from drf_spectacular.utils import extend_schema
 from apps.notifications.serializers import NotificationSerializer
 
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
 
 class NotificationViewSet(viewsets.ModelViewSet):
     serializer_class = NotificationSerializer
     queryset = Notification.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly,]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
     @extend_schema(
         tags=['Notification'],
