@@ -2,12 +2,20 @@ from rest_framework import viewsets
 from .models import WareHouse, WareHouseItem
 from .serializers import WareHouseSerializer, WareHouseItemSerializer
 
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, extend_schema_view
 
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.openapi import OpenApiParameter
 
 
+@extend_schema_view(
+    list=extend_schema(tags=["Watehouse"]),
+    retrieve=extend_schema(tags=["Watehouse"]),
+    create=extend_schema(tags=["Watehouse"]),
+    update=extend_schema(tags=["Watehouse"]),
+    partial_update=extend_schema(tags=["Watehouse"]),
+    destroy=extend_schema(tags=["Watehouse"])
+)
 class WareHouseViewSet(viewsets.ModelViewSet):
     queryset = WareHouse.objects.prefetch_related('warehouseitem_set').all()
     serializer_class = WareHouseSerializer

@@ -9,7 +9,7 @@ class ProductImageSerializer(ModelSerializer):
     # product = IntegerField(read_only=True)
 
     class Meta:
-        fields = ('id', 'image')
+        fields = "__all__"
         model = ProductImage
 
 

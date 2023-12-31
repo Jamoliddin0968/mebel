@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema_view
 from .models import Product, ProductImage
 from .serializers import ProductSerializer, ProductImageSerializer
 from rest_framework import viewsets
@@ -50,23 +51,12 @@ class ProductViewSet(viewsets.ModelViewSet):
         return super().partial_update(request, *args, **kwargs)
 
 
-class ProductImageCreateAPIView(CreateAPIView):
+@extend_schema_view(
+    create=extend_schema(tags=["Product Images"]),
+    destroy=extend_schema(tags=["Product Images"])
+)
+class ProductImageViewset(viewsets.ModelViewSet):
     queryset = ProductImage.objects.all()
     serializer_class = ProductImageSerializer
 
-    def post(self, request, product_id):
-        try:
-            product = Product.objects.get(pk=product_id)
-        except Product.DoesNotExist:
-            return Response({"error": "Product does not exist"}, status=status.HTTP_404_NOT_FOUND)
-
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(product=product)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class ProductImageDestroyAPIView(DestroyAPIView):
-    queryset = ProductImage.objects.all()
-    serializer_class = ProductImageSerializer
+    http_method_names = ["post", "delete"]
