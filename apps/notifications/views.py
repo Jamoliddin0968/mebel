@@ -1,10 +1,10 @@
 from rest_framework import viewsets
-from apps.notifications.models import Notification, ScheduledLoan
+from apps.notifications.models import Notification
 from drf_spectacular.utils import extend_schema
 from apps.notifications.serializers import NotificationSerializer
 from drf_spectacular.utils import extend_schema_view
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from .serializers import ScheduledLoanSerializer
+# from .serializers import ScheduledLoanSerializer
 
 
 class NotificationViewSet(viewsets.ModelViewSet):
@@ -57,17 +57,3 @@ class NotificationViewSet(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
 
-
-@extend_schema_view(
-    list=extend_schema(tags=["Scheduled Loans"]),
-    retrieve=extend_schema(tags=["Scheduled Loans"]),
-    create=extend_schema(tags=["Scheduled Loans"]),
-    update=extend_schema(tags=["Scheduled Loans"]),
-    partial_update=extend_schema(tags=["Scheduled Loans"]),
-    destroy=extend_schema(tags=["Scheduled Loans"])
-)
-class ScheduledLoanSerializer(viewsets.ModelViewSet):
-    serializer_class = ScheduledLoanSerializer
-    queryset = ScheduledLoan
-
-    http_method_names = ["post", "delete", "patch"]
