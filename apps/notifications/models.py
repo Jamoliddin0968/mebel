@@ -11,5 +11,5 @@ class Notification(models.Model):
 
 class ScheduledNotification(models.Model):
     message = models.TextField()
-    date = models.DateField()
+    date = models.DateField(auto_now_add=True)
     status = models.BooleanField(default=True)

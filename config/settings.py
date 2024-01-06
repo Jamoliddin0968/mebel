@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+from celery.schedules import crontab
 from datetime import timedelta
 import os
 from pathlib import Path
@@ -51,6 +51,8 @@ MY_APPS = [
 LIBS = [
     "rest_framework",
     'rest_framework_simplejwt',
+    'celery',
+    'django_celery_beat',
 ]
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -164,14 +166,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
-
-
-# Your other settings...
-
-# Define the base directory of your project
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Media Settings
+# dia Settings
 MEDIA_URL = '/media/'  # The URL to serve media files during development
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -216,4 +211,26 @@ SIMPLE_JWT = {
     "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379',
+    }
+}
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+
+# CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+CELERY_BEAT_SCHEDULE = {
+    'scheduled_task': {
+        'task': 'apps.notifications.tasks.create_notifications',
+        "schedule": crontab(hour=0, minute=1),
+    },
+    # 'scheduled_task_10_30': {
+    #     'task': 'bank.tasks.update_bank_data',
+    #     "schedule": crontab(hour=5, minute=30),
+    # },
 }

@@ -12,6 +12,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
     queryset = Notification.objects.all()
     permission_classes = [IsAuthenticatedOrReadOnly,]
 
+    
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 

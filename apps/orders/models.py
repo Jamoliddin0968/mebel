@@ -2,11 +2,12 @@ from django.db import models
 
 from apps.notifications.models import ScheduledNotification
 
+EMPTY = 0
 COMPLETED = 1
 NOT_INSTALLED = 2
 NOT_FILLED = 3
 IN_PROGRESS = 4
-STATES = ((COMPLETED, COMPLETED), (NOT_INSTALLED, NOT_INSTALLED),
+STATES = ((EMPTY, EMPTY), (COMPLETED, COMPLETED), (NOT_INSTALLED, NOT_INSTALLED),
           (NOT_FILLED, NOT_FILLED), (IN_PROGRESS, IN_PROGRESS))
 
 
@@ -20,10 +21,11 @@ class Order(models.Model):
 
     view_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
+    completion_date = models.DateField(null=True, blank=True)
     price = models.DecimalField(max_digits=13, decimal_places=2, default=0)
 
     comment = models.TextField(default="")
-    state = models.IntegerField(choices=STATES, default=NOT_FILLED)
+    state = models.IntegerField(choices=STATES, default=EMPTY)
     is_notificated = models.BooleanField(default=False)
     notification = models.ForeignKey(
         ScheduledNotification, on_delete=models.SET_NULL, null=True, blank=True)

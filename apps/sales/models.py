@@ -17,5 +17,6 @@ class SaleItem(models.Model):
     product = models.ForeignKey(
         "products.Product", on_delete=models.CASCADE)
     amount = models.FloatField(default=0)
+    comment = models.TextField(default="")
     sale = models.ForeignKey(
         Sale, on_delete=models.CASCADE, related_name='sale_items')  # For
