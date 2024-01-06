@@ -1,9 +1,15 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-from .models import Order, OrderImage, EMPTY, NOT_FILLED, NOT_INSTALLED, IN_PROGRESS
+from .models import Order, OrderImage, EMPTY, NOT_FILLED, NOT_INSTALLED, IN_PROGRESS, OrderItem
 
 from apps.notifications.models import ScheduledNotification
 from apps.utils.messages import get_order_message
+
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderItem
+        fields = "__all__"
 
 
 class OrderImageSerializer(serializers.ModelSerializer):

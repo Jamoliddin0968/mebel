@@ -6,6 +6,7 @@ router = routers.DefaultRouter()
 router.register("", OrderViewSet)
 router.register("images", OrderImageViewSet)
 router.register('full', FullOrderViewSet)
+router.register("items", OrderItemViewSet)
 urlpatterns = [
     path("", include(router.urls), name="orders"),
     path("<int:pk>/view_date", ViewDateApiView.as_view(), name="View_dateapi"),

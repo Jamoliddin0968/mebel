@@ -64,3 +64,16 @@ class FullOrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     queryset = Order.objects.all()
     http_method_names = ["get"]
+
+
+@extend_schema_view(
+    list=extend_schema(tags=["OrderItem"]),
+    retrieve=extend_schema(tags=["OrderItem"]),
+    create=extend_schema(tags=["OrderItem"]),
+    update=extend_schema(tags=["OrderItem"]),
+    partial_update=extend_schema(tags=["OrderItem"]),
+    destroy=extend_schema(tags=["OrderItem"])
+)
+class OrderItemViewSet(viewsets.ModelViewSet):
+    serializer_class = OrderItemSerializer
+    queryset = OrderItem.objects.all()
