@@ -20,18 +20,16 @@ class UserAdmin(BaseUserAdmin):
             },
         ),
         ("", {
-            "fields": ("name", "phone", "birth_date", "percentage", "address", "salary"),
+            "fields": ("phone", "first_name", "last_name", "patronymic",  "address"),
         }),
     )
 
     fieldsets = (
         ("Asosiy ma'lumotlar", {
-            "fields": ("username", "name", "phone", "birth_date", "percentage", "address", "salary"),
+            "fields": ("username",  "phone",  "first_name", "last_name", "patronymic", "address"),
         }),
     )
     # ordesring = ("id",)
 # hodimlar
 
 # ruhstanoma
-
-
