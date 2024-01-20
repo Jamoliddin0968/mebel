@@ -56,6 +56,7 @@ LIBS = [
     'rest_framework_simplejwt',
     'celery',
     'django_celery_beat',
+    'django_filters',
 ]
 INSTALLED_APPS = [
     'django.contrib.admin',

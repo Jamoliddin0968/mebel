@@ -1,8 +1,10 @@
+from django_filters import rest_framework as filters
 from drf_spectacular.openapi import OpenApiParameter
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework import viewsets
 
+from .filters import WareHouseItemFilter
 from .models import WareHouseItem
 from .serializers import WareHouseItemCreateSerializer, WareHouseItemSerializer
 
@@ -20,5 +22,7 @@ class WareHouseItemViewSet(viewsets.ModelViewSet):
         if self.action == 'create' or self.action == 'partial_update':
             return WareHouseItemCreateSerializer
         return WareHouseItemSerializer
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_class = WareHouseItemFilter
 
     http_method_names = ['get', 'post', 'patch']
