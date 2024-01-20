@@ -9,11 +9,13 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-from celery.schedules import crontab
-from datetime import timedelta
 import os
+from datetime import timedelta
 from pathlib import Path
+
+from celery.schedules import crontab
 from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -46,6 +48,7 @@ MY_APPS = [
     'apps.notifications',
     'apps.loans',
     'apps.scheduled_loans',
+    'apps.warehouse_items',
 
 ]
 LIBS = [
@@ -65,8 +68,11 @@ INSTALLED_APPS = [
     'drf_spectacular',
 ] + MY_APPS + LIBS
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Your Project API',
-    'DESCRIPTION': 'Your project description',
+    'TITLE': 'Sultan mebel api',
+    'DESCRIPTION': """
+        Agar siz Karimjon bo'lsangiz yaxshisi dasturdan chiqib keting(Alt+Fn+F4)
+        bu swagger Akramjon Uchun Muhimi Category id ni optashadim
+    """,
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
