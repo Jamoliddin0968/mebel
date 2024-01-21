@@ -1,8 +1,10 @@
-from rest_framework.serializers import ModelSerializer, IntegerField
+from rest_framework.serializers import IntegerField, ModelSerializer
 
-from .models import (Product, ProductImage)
-from apps.warehouses.models import WareHouse
 from apps.branches.models import Branch
+from apps.warehouse_items.models import WareHouseItem
+from apps.warehouses.models import WareHouse
+
+from .models import Product, ProductImage
 
 
 class ProductImageSerializer(ModelSerializer):
@@ -25,7 +27,7 @@ class ProductSerializer(ModelSerializer):
         new_product = super().create(validated_data)
         branches = WareHouse.objects.all()
         for branch_item in branches:
-            WareHouse.objects.get_or_create(
+            WareHouseItem.objects.get_or_create(
                 warehouse=branch_item, product=new_product)
 
         return new_product
