@@ -26,26 +26,6 @@ class Product(models.Model):
 class ProductImage(models.Model):
     product = models.ForeignKey(
         "products.product", on_delete=models.CASCADE, related_name='product_images')
-    image = models.ImageField(upload_to=rename_image)
-# Mahsulot klassi
+    image = models.ForeignKey(
+        "images.Images", on_delete=models.CASCADE, related_name='product_images')
 
-
-# class SuiteItems(BaseModel):
-#     suite = models.ForeignKey("product.product", on_delete=models.DO_NOTHING, verbose_name=_(
-#         "Komplekt"), related_name="Suite")
-
-#     class Meta:
-#         verbose_name = _("Komplekt tarkibi")
-#         db_table = 'set_connection'
-# # komplekt
-
-
-# class Stock(BaseModel):
-#     branch = models.ForeignKey("branch.Branch", verbose_name=_(
-#         "Filial"), on_delete=models.DO_NOTHING)
-
-#     class Meta:
-#         verbose_name = "Ombor"
-#         verbose_name_plural = "Ombor"
-#         db_table = 'stock'
-# # ombor

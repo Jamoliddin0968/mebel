@@ -49,6 +49,7 @@ MY_APPS = [
     'apps.loans',
     'apps.scheduled_loans',
     'apps.warehouse_items',
+    'apps.images',
 
 ]
 LIBS = [
