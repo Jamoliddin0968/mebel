@@ -1,12 +1,12 @@
 from drf_spectacular.openapi import OpenApiParameter
 from drf_spectacular.types import OpenApiTypes
-from drf_spectacular.utils import extend_schema, extend_schema_view
+
 from rest_framework import viewsets
 
 from .models import WareHouse
 from .serializers import WareHouseSerializer
 
-
+from drf_spectacular.utils import extend_schema, extend_schema_view
 @extend_schema_view(
     list=extend_schema(tags=["Watehouse"]),
     retrieve=extend_schema(tags=["Watehouse"]),

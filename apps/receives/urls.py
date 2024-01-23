@@ -7,8 +7,8 @@ from rest_framework.routers import DefaultRouter
 
 
 router = DefaultRouter()
-router.register("", ReceiveViewSet)
-router.register('items', ReceiveItemViewSet)
+router.register("receives", ReceiveViewSet,basename='receive')
+router.register('receives-items', ReceiveItemViewSet,basename='receive_items')
 urlpatterns = [
     path("", include(router.urls)),
 ]

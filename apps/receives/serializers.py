@@ -9,6 +9,9 @@ class ReceiveItemSerializer(serializers.ModelSerializer):
         fields = "__all__"
         model = ReceiveItem
 
+        extra_kwargs = {
+            'receive': {'read_only': True}
+        }
 
 class ReceiveSerializer(serializers.ModelSerializer):
     items = ReceiveItemSerializer(many=True, source="receive_items")
