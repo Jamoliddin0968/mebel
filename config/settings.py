@@ -47,7 +47,7 @@ MY_APPS = [
     'apps.orders',
     'apps.notifications',
     'apps.loans',
-    'apps.images',
+    'apps.image',
     'apps.scheduled_loans',
     'apps.warehouse_items',
 

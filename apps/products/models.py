@@ -1,9 +1,10 @@
 
-from django.db import models
-from django.utils.translation import gettext_lazy as _
 # from apps.documents.models import BaseModel
 # from apps.categories.models import Category
 import uuid
+
+from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 def rename_image(instance, filename):
@@ -27,5 +28,4 @@ class ProductImage(models.Model):
     product = models.ForeignKey(
         "products.product", on_delete=models.CASCADE, related_name='product_images')
     image = models.ForeignKey(
-        "images.Images", on_delete=models.CASCADE, related_name='product_images')
-
+        "image.Image", on_delete=models.CASCADE, related_name='product_images')

@@ -41,7 +41,7 @@ urlpatterns = [
     path('api/v1/loans/', include('apps.loans.urls')),
     path('api/v1/notifications/', include('apps.notifications.urls')),
     path('api/v1/scheduled_loans/', include('apps.scheduled_loans.urls')),
-    path('api/v1/images/', include('apps.images.urls')),
+    path('api/v1/image/', include('apps.image.urls')),
 ]+drf_yasg_urlpatterns+token_urlpatterns
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

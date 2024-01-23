@@ -34,7 +34,7 @@ class Order(models.Model):
 class OrderImage(models.Model):
     order = models.ForeignKey(
         Order, on_delete=models.CASCADE, related_name="order_images")
-    img = models.ForeignKey('images.Images', on_delete=models.CASCADE)
+    img = models.ForeignKey('image.Image', on_delete=models.CASCADE)
 
 
 class OrderItem(models.Model):
