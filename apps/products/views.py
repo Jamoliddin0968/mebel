@@ -1,17 +1,14 @@
-from drf_spectacular.utils import extend_schema_view
-from .models import Product, ProductImage
-from .serializers import ProductSerializer, ProductImageSerializer
-from rest_framework import viewsets
+from drf_spectacular.utils import extend_schema, extend_schema_view
+from rest_framework import status, viewsets
 from rest_framework.generics import CreateAPIView, DestroyAPIView
-
-from rest_framework import status
 from rest_framework.response import Response
 
-from drf_spectacular.utils import extend_schema
+from .models import Product, ProductImage
+from .serializers import ProductImageSerializer, ProductSerializer
 
 
 class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.select_related('product_images').all()
+    queryset = Product.objects.all()
     serializer_class = ProductSerializer
     http_method_names = ['get', 'post', 'put', 'patch']
 

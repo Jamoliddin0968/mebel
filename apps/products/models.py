@@ -28,4 +28,4 @@ class ProductImage(models.Model):
     product = models.ForeignKey(
         "products.product", on_delete=models.CASCADE, related_name='product_images')
     image = models.ForeignKey(
-        "image.Image", on_delete=models.CASCADE, related_name='product_images')
+        "image.Image", on_delete=models.CASCADE)
