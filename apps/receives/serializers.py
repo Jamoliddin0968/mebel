@@ -38,7 +38,7 @@ class ReceiveSerializer(serializers.ModelSerializer):
         for item in items:
             receive_item = ReceiveItem(**item)
             receive_item.receive = obj
-            warehouse_item,_ = WareHouseItem.get_or_create(product_id=item.get('product_id'))
+            warehouse_item,_ = WareHouseItem.objects.get_or_create(product_id=item.get('product_id'))
             warehouse_item.amount += item.get('amount')
             warehouse_item.save()
             receive_item_list.append(receive_item)
