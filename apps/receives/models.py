@@ -12,6 +12,6 @@ class Receive(models.Model):
 
 class ReceiveItem(models.Model):
     product = models.ForeignKey(
-        'products.Product', on_delete=models.CASCADE, related_name="receive_items")
+        'products.Product', on_delete=models.CASCADE,)
     amount = models.FloatField(default=0)
-    receive = models.ForeignKey(Receive, on_delete=models.CASCADE)
+    receive = models.ForeignKey(Receive, on_delete=models.CASCADE, related_name="receive_items")

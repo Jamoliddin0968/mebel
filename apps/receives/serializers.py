@@ -16,7 +16,7 @@ class ReceiveItemSerializer(serializers.ModelSerializer):
         # }
 
 class ReceiveSerializer(serializers.ModelSerializer):
-    receive_items = ReceiveItemSerializer(many=True,write_only=True)
+    receive_items = ReceiveItemSerializer(many=True)
 
     class Meta:
         model = Receive
@@ -27,7 +27,6 @@ class ReceiveSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        # print(validated_data)
         items = validated_data.pop('receive_items')
         obj =  super(ReceiveSerializer, self).create(validated_data)
         branch = obj.branch
@@ -43,7 +42,4 @@ class ReceiveSerializer(serializers.ModelSerializer):
             warehouse_item.save()
             receive_item_list.append(receive_item)
         ReceiveItem.objects.bulk_create(receive_item_list)
-        # obj=Receive.objects.prefetch_related(
-        #         Prefetch('receive_items', queryset=ReceiveItem.objects.all())
-        #     ).get(id=obj.id)
         return obj
