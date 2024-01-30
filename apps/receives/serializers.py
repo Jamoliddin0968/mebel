@@ -14,7 +14,7 @@ class ReceiveItemSerializer(serializers.ModelSerializer):
         }
 
 class ReceiveSerializer(serializers.ModelSerializer):
-    items = ReceiveItemSerializer(many=True, source="receive_items")
+    receive_items = ReceiveItemSerializer(many=True, source="receive_items")
 
     class Meta:
         model = Receive
@@ -25,7 +25,9 @@ class ReceiveSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        items = validated_data.pop('items')
+        # print(validated_data)
+        items = validated_data.pop('receive_items')
+
         obj = super().create(validated_data)
         amount = obj.amount
         product = obj.product
