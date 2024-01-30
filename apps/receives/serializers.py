@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from apps.receives.models import Receive, ReceiveItem
+from apps.warehouse_items.models import WareHouseItem
 from apps.warehouses.models import WareHouse
 
 
@@ -14,7 +15,7 @@ class ReceiveItemSerializer(serializers.ModelSerializer):
         }
 
 class ReceiveSerializer(serializers.ModelSerializer):
-    receive_items = ReceiveItemSerializer(many=True, source="receive_items")
+    receive_items = ReceiveItemSerializer(many=True)
 
     class Meta:
         model = Receive
@@ -29,18 +30,17 @@ class ReceiveSerializer(serializers.ModelSerializer):
         items = validated_data.pop('receive_items')
 
         obj = super().create(validated_data)
-        amount = obj.amount
-        product = obj.product
         branch = obj.branch
-        warehouse_item, _ = WareHouse.objects.get_or_create(
-            product=product, branch=branch)
+        warehouse_item, _ = WareHouse.objects.get_or_create( branch=branch)
         receive_item_list = []
-        warehouse_item.amount += amount
-        warehouse_item.save()
+
 
         for item in items:
             receive_item = ReceiveItem(**item)
             receive_item.receive = obj
+            warehouse_item,_ = WareHouseItem.get_or_create(product_id=item.get('product_id'))
+            warehouse_item.amount += item.get('amount')
+            warehouse_item.save()
             receive_item_list.append(receive_item)
         ReceiveItem.objects.bulk_create(receive_item_list)
         return obj
