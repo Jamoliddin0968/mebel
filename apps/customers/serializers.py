@@ -4,7 +4,7 @@ from rest_framework.serializers import IntegerField
 
 
 class CustomerSerializer(ModelSerializer):
-    loan = IntegerField(read_only=True)
+    # loan = IntegerField(read_only=True)
 
     class Meta:
         model = Customer

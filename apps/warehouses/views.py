@@ -8,12 +8,12 @@ from .serializers import WareHouseSerializer
 
 from drf_spectacular.utils import extend_schema, extend_schema_view
 @extend_schema_view(
-    list=extend_schema(tags=["Watehouse"]),
-    retrieve=extend_schema(tags=["Watehouse"]),
-    create=extend_schema(tags=["Watehouse"]),
-    update=extend_schema(tags=["Watehouse"]),
-    partial_update=extend_schema(tags=["Watehouse"]),
-    destroy=extend_schema(tags=["Watehouse"])
+    list=extend_schema(tags=["Warehouse"]),
+    retrieve=extend_schema(tags=["Warehouse"]),
+    create=extend_schema(tags=["Warehouse"]),
+    update=extend_schema(tags=["Warehouse"]),
+    partial_update=extend_schema(tags=["Warehouse"]),
+    destroy=extend_schema(tags=["Warehouse"])
 )
 class WareHouseViewSet(viewsets.ModelViewSet):
     queryset = WareHouse.objects.all()
